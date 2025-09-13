@@ -1,0 +1,54 @@
+local UserInputService = game:GetService('UserInputService')
+local Players = game:GetService('Players')
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+
+-- Default and max values
+local maxRadius = 112412400000 -- insanely high
+local delayTime = 0.2 -- small wait before killing
+
+-- Keep max simulation radius
+spawn(function()
+    while true do
+        task.wait(1)
+        sethiddenproperty(LocalPlayer, 'SimulationRadius', maxRadius)
+        sethiddenproperty(LocalPlayer, 'MaxSimulationRadius', maxRadius)
+    end
+end)
+
+-- Track if E is being held
+local holdingE = false
+
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    if input.KeyCode == Enum.KeyCode.E then
+        holdingE = true
+        spawn(function()
+            while holdingE do
+                -- Small wait to ensure max radius is active
+                task.wait(delayTime)
+
+                local targetPart = Mouse.Target
+                if targetPart then
+                    local targetModel = targetPart:FindFirstAncestorOfClass('Model')
+                    if targetModel and targetModel ~= LocalPlayer.Character then
+                        local humanoid = targetModel:FindFirstChildOfClass('Humanoid')
+                            or targetModel:FindFirstChildWhichIsA('Humanoid', true)
+
+                        if humanoid then
+                            humanoid.Health = 0
+                        end
+                    end
+                end
+
+                task.wait(0) -- spam as fast as possible
+            end
+        end)
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.E then
+        holdingE = false
+    end
+end)
