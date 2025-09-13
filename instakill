@@ -3,7 +3,20 @@ local Players = game:GetService('Players')
 local LocalPlayer = Players.LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 
+-- =============================
+-- Queue teleport setup for Zenith
+-- =============================
+local TeleportCheck = false
+LocalPlayer.OnTeleport:Connect(function(State)
+    if not TeleportCheck then
+        TeleportCheck = true
+        queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/mexicanlynae/Loaders/refs/heads/main/instakill'))()")
+    end
+end)
+
+-- =============================
 -- Default and max values
+-- =============================
 local maxRadius = 112412400000 -- insanely high
 local delayTime = 0.2 -- small wait before killing
 
@@ -25,7 +38,6 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
         holdingE = true
         spawn(function()
             while holdingE do
-                -- Small wait to ensure max radius is active
                 task.wait(delayTime)
 
                 local targetPart = Mouse.Target
