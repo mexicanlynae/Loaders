@@ -6,11 +6,14 @@ local LocalPlayer = Players.LocalPlayer
 -- Queue teleport setup for Zenith
 -- =============================
 local TeleportCheck = false
-LocalPlayer.OnTeleport:Connect(function(State)
-    if not TeleportCheck then
-        TeleportCheck = true
-        queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/mexicanlynae/Loaders/refs/heads/main/instakill'))()")
-    end
+-- pcall ensures it won't error if OnTeleport doesn't exist yet
+pcall(function()
+    LocalPlayer.OnTeleport:Connect(function(State)
+        if not TeleportCheck then
+            TeleportCheck = true
+            queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/mexicanlynae/Loaders/refs/heads/main/instakill'))()")
+        end
+    end)
 end)
 
 -- =============================
