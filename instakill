@@ -1,7 +1,6 @@
 local UserInputService = game:GetService('UserInputService')
 local Players = game:GetService('Players')
 local LocalPlayer = Players.LocalPlayer
-local Mouse = LocalPlayer:GetMouse()
 
 -- =============================
 -- Queue teleport setup for Zenith
@@ -13,6 +12,11 @@ LocalPlayer.OnTeleport:Connect(function(State)
         queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/mexicanlynae/Loaders/refs/heads/main/instakill'))()")
     end
 end)
+
+-- =============================
+-- Get Mouse safely with cloneref
+-- =============================
+local IYMouse = cloneref(LocalPlayer:GetMouse())
 
 -- =============================
 -- Default and max values
@@ -40,7 +44,7 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
             while holdingE do
                 task.wait(delayTime)
 
-                local targetPart = Mouse.Target
+                local targetPart = IYMouse.Target
                 if targetPart then
                     local targetModel = targetPart:FindFirstAncestorOfClass('Model')
                     if targetModel and targetModel ~= LocalPlayer.Character then
