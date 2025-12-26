@@ -1,0 +1,23 @@
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-26 11:01:46
+-- Luau version 6, Types version 3
+-- Time taken: 0.001769 seconds
+
+local any_ref_result1_upvr = require(script.Parent.Parent.namespaces.packetIDs).ref()
+local Spawn_upvr = require(script.Parent.Parent.Parent.Parent.Modules.Spawn)
+return function(arg1, arg2) -- Line 7
+	--[[ Upvalues[2]:
+		[1]: any_ref_result1_upvr (readonly)
+		[2]: Spawn_upvr (readonly)
+	]]
+	local const_number = 0
+	while const_number < buffer.len(arg1) do
+		local var5 = any_ref_result1_upvr[buffer.readu8(arg1, const_number)]
+		local any_reader_result1, any_reader_result2 = var5.reader(arg1, const_number + 1)
+		local any_getListener_result1 = var5.getListener()
+		if any_getListener_result1 then
+			Spawn_upvr(any_getListener_result1, any_reader_result1, arg2)
+		end
+	end
+end

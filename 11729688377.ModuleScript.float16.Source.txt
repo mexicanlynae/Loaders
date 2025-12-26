@@ -1,0 +1,23 @@
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-26 11:00:44
+-- Luau version 6, Types version 3
+-- Time taken: 0.001272 seconds
+
+local bufferWriter = require(script.Parent.Parent.process.bufferWriter)
+local module_upvr = {
+	write = bufferWriter.f16;
+}
+local readf16_upvr = bufferWriter.readf16
+function module_upvr.read(arg1, arg2) -- Line 10
+	--[[ Upvalues[1]:
+		[1]: readf16_upvr (readonly)
+	]]
+	return readf16_upvr(arg1, arg2), 2
+end
+return function() -- Line 15
+	--[[ Upvalues[1]:
+		[1]: module_upvr (readonly)
+	]]
+	return module_upvr
+end

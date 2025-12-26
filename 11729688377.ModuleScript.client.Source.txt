@@ -1,0 +1,140 @@
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-26 11:01:42
+-- Luau version 6, Types version 3
+-- Time taken: 0.008822 seconds
+
+local ReplicatedStorage_upvr = game:GetService("ReplicatedStorage")
+local bufferWriter_upvr = require(script.Parent.bufferWriter)
+local alloc_upvr = bufferWriter_upvr.alloc
+local u8_upvr = bufferWriter_upvr.u8
+local load_upvr = bufferWriter_upvr.load
+local read_upvr = require(script.Parent.read)
+local function onClientEvent_upvr(arg1) -- Line 22, Named "onClientEvent"
+	--[[ Upvalues[1]:
+		[1]: read_upvr (readonly)
+	]]
+	read_upvr(arg1)
+end
+local function _() -- Line 26, Named "create"
+	return {
+		cursor = 0;
+		size = 256;
+		buff = buffer.create(256);
+		ready = true;
+	}
+end
+local function _() -- Line 35, Named "fn"
+end
+local function _(arg1) -- Line 38, Named "dump"
+	local cursor_2 = arg1.cursor
+	local buffer_create_result1_3 = buffer.create(cursor_2)
+	buffer.copy(buffer_create_result1_3, 0, arg1.buff, 0, cursor_2)
+	return buffer_create_result1_3
+end
+local tbl_upvw_2 = {
+	cursor = 0;
+	size = 256;
+	buff = buffer.create(256);
+	ready = true;
+}
+local tbl_upvw = {
+	cursor = 0;
+	size = 256;
+	buff = buffer.create(256);
+	ready = true;
+}
+local module = {}
+local info_upvr = debug.info
+local find_upvr = string.find
+local var15_upvw = false
+local Spawn_upvr = require(ReplicatedStorage_upvr.Modules.Spawn)
+function module.sendReliable(arg1, arg2, arg3) -- Line 53
+	--[[ Upvalues[10]:
+		[1]: tbl_upvw_2 (read and write)
+		[2]: load_upvr (readonly)
+		[3]: alloc_upvr (readonly)
+		[4]: u8_upvr (readonly)
+		[5]: bufferWriter_upvr (readonly)
+		[6]: info_upvr (readonly)
+		[7]: find_upvr (readonly)
+		[8]: var15_upvw (read and write)
+		[9]: Spawn_upvr (readonly)
+		[10]: ReplicatedStorage_upvr (readonly)
+	]]
+	tbl_upvw_2 = load_upvr(tbl_upvw_2)
+	alloc_upvr(1)
+	u8_upvr(arg1)
+	arg2(arg3)
+	tbl_upvw_2 = bufferWriter_upvr.export()
+	if not find_upvr(info_upvr(3, 's'), "%.") and not var15_upvw then
+		var15_upvw = true
+		Spawn_upvr(function() -- Line 66
+			--[[ Upvalues[1]:
+				[1]: ReplicatedStorage_upvr (copied, readonly)
+			]]
+			local ClientAnimalReady = ReplicatedStorage_upvr:FindFirstChild("ClientAnimalReady")
+			if not ClientAnimalReady then
+			else
+				ClientAnimalReady.FireServer(ClientAnimalReady)
+			end
+		end)
+	end
+end
+function module.sendUnreliable(arg1, arg2, arg3) -- Line 82
+	--[[ Upvalues[5]:
+		[1]: tbl_upvw (read and write)
+		[2]: load_upvr (readonly)
+		[3]: alloc_upvr (readonly)
+		[4]: u8_upvr (readonly)
+		[5]: bufferWriter_upvr (readonly)
+	]]
+	tbl_upvw = load_upvr(tbl_upvw)
+	alloc_upvr(1)
+	u8_upvr(arg1)
+	arg2(arg3)
+	tbl_upvw = bufferWriter_upvr.export()
+end
+local RunService_upvr = game:GetService("RunService")
+function module.start() -- Line 92
+	--[[ Upvalues[5]:
+		[1]: ReplicatedStorage_upvr (readonly)
+		[2]: onClientEvent_upvr (readonly)
+		[3]: RunService_upvr (readonly)
+		[4]: tbl_upvw_2 (read and write)
+		[5]: tbl_upvw (read and write)
+	]]
+	local ByteNetReliable_upvr = ReplicatedStorage_upvr:WaitForChild("ByteNetReliable")
+	ByteNetReliable_upvr.OnClientEvent:Connect(onClientEvent_upvr)
+	local ByteNetUnreliable_upvr = ReplicatedStorage_upvr:WaitForChild("ByteNetUnreliable")
+	ByteNetUnreliable_upvr.OnClientEvent:Connect(onClientEvent_upvr)
+	local FireServer_upvr = ByteNetReliable_upvr.FireServer
+	local FireServer_upvr_2 = ByteNetUnreliable_upvr.FireServer
+	RunService_upvr.Heartbeat:Connect(function() -- Line 102
+		--[[ Upvalues[6]:
+			[1]: tbl_upvw_2 (copied, read and write)
+			[2]: FireServer_upvr (readonly)
+			[3]: ByteNetReliable_upvr (readonly)
+			[4]: tbl_upvw (copied, read and write)
+			[5]: FireServer_upvr_2 (readonly)
+			[6]: ByteNetUnreliable_upvr (readonly)
+		]]
+		if 0 < tbl_upvw_2.cursor then
+			local var25 = tbl_upvw_2
+			local cursor_3 = var25.cursor
+			local buffer_create_result1 = buffer.create(cursor_3)
+			buffer.copy(buffer_create_result1, 0, var25.buff, 0, cursor_3)
+			FireServer_upvr(ByteNetReliable_upvr, buffer_create_result1)
+			tbl_upvw_2.cursor = 0
+		end
+		if 0 < tbl_upvw.cursor then
+			local var28 = tbl_upvw
+			local cursor = var28.cursor
+			local buffer_create_result1_2 = buffer.create(cursor)
+			buffer.copy(buffer_create_result1_2, 0, var28.buff, 0, cursor)
+			FireServer_upvr_2(ByteNetUnreliable_upvr, buffer_create_result1_2)
+			tbl_upvw.cursor = 0
+		end
+	end)
+end
+return module

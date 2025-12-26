@@ -1,0 +1,69 @@
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-26 11:01:52
+-- Luau version 6, Types version 3
+-- Time taken: 0.004858 seconds
+
+local replicatedValue_upvr = script.Parent.replicatedValue
+if game:GetService("RunService"):IsServer() then
+	replicatedValue_upvr = "server"
+else
+	replicatedValue_upvr = "client"
+end
+local var2_upvw
+local module = {}
+local ReplicatedStorage_upvr = game:GetService("ReplicatedStorage")
+function module.start() -- Line 14
+	--[[ Upvalues[3]:
+		[1]: replicatedValue_upvr (readonly)
+		[2]: ReplicatedStorage_upvr (readonly)
+		[3]: var2_upvw (read and write)
+	]]
+	if replicatedValue_upvr == "server" then
+		local Folder = Instance.new("Folder")
+		Folder.Name = "BytenetStorage"
+		Folder.Parent = ReplicatedStorage_upvr
+		var2_upvw = Folder
+	elseif replicatedValue_upvr == "client" then
+		var2_upvw = ReplicatedStorage_upvr:WaitForChild("BytenetStorage")
+	end
+end
+local module_2_upvr = {}
+local var1_2_upvr = require(replicatedValue_upvr)
+function module.access(arg1) -- Line 26
+	--[[ Upvalues[4]:
+		[1]: module_2_upvr (readonly)
+		[2]: replicatedValue_upvr (readonly)
+		[3]: var2_upvw (read and write)
+		[4]: var1_2_upvr (readonly)
+	]]
+	-- KONSTANTERROR: [0] 1. Error Block 16 start (CF ANALYSIS FAILED)
+	if module_2_upvr[arg1] then
+		return module_2_upvr[arg1]
+	end
+	if replicatedValue_upvr == "client" then
+		local SOME = var2_upvw:WaitForChild(arg1, 10)
+		if SOME and SOME:IsA("StringValue") then
+			local var1_2_upvr_result1 = var1_2_upvr(SOME)
+			module_2_upvr[arg1] = var1_2_upvr_result1
+			do
+				return var1_2_upvr_result1
+			end
+			-- KONSTANTWARNING: GOTO [46] #40
+		end
+	elseif replicatedValue_upvr == "server" then
+		local StringValue = Instance.new("StringValue")
+		StringValue.Name = arg1
+		StringValue.Parent = var2_upvw
+		local var7_result1 = var1_2_upvr(StringValue)
+		module_2_upvr[arg1] = var7_result1
+		return var7_result1
+	end
+	-- KONSTANTERROR: [0] 1. Error Block 16 end (CF ANALYSIS FAILED)
+	-- KONSTANTERROR: [46] 40. Error Block 10 start (CF ANALYSIS FAILED)
+	do
+		return module_2_upvr[arg1]
+	end
+	-- KONSTANTERROR: [46] 40. Error Block 10 end (CF ANALYSIS FAILED)
+end
+return module

@@ -1,0 +1,290 @@
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-26 11:01:44
+-- Luau version 6, Types version 3
+-- Time taken: 0.022689 seconds
+
+local ReplicatedStorage_upvr = game:GetService("ReplicatedStorage")
+local bufferWriter_upvr = require(script.Parent.bufferWriter)
+local alloc_upvr = bufferWriter_upvr.alloc
+local u8_upvr = bufferWriter_upvr.u8
+local load_upvr = bufferWriter_upvr.load
+local tbl_upvr = {}
+local tbl_upvr_4 = {}
+local tbl_upvr_3 = {}
+local tbl_upvr_2 = {}
+local function _() -- Line 29, Named "create"
+	return {
+		cursor = 0;
+		size = 256;
+		buff = buffer.create(256);
+		ready = false;
+	}
+end
+local function _(arg1) -- Line 38, Named "dump"
+	local cursor = arg1.cursor
+	local buffer_create_result1_3 = buffer.create(cursor)
+	buffer.copy(buffer_create_result1_3, 0, arg1.buff, 0, cursor)
+	return buffer_create_result1_3
+end
+local tbl_upvw = {
+	cursor = 0;
+	size = 256;
+	buff = buffer.create(256);
+	ready = false;
+}
+local tbl_upvw_2 = {
+	cursor = 0;
+	size = 256;
+	buff = buffer.create(256);
+	ready = false;
+}
+local read_upvr = require(script.Parent.read)
+local function onServerEvent_upvr(arg1, arg2) -- Line 52, Named "onServerEvent"
+	--[[ Upvalues[2]:
+		[1]: tbl_upvr_2 (readonly)
+		[2]: read_upvr (readonly)
+	]]
+	if typeof(arg2) ~= "buffer" then
+	else
+		local var16 = (tbl_upvr_2[arg1] or 0) + math.max(buffer.len(arg2), 600)
+		if 9000 < var16 then return end
+		tbl_upvr_2[arg1] = var16
+		read_upvr(arg2, arg1)
+	end
+end
+local function playerAdded_upvr(arg1) -- Line 63, Named "playerAdded"
+	--[[ Upvalues[2]:
+		[1]: tbl_upvr (readonly)
+		[2]: tbl_upvr_4 (readonly)
+	]]
+	if not tbl_upvr[arg1] then
+		tbl_upvr[arg1] = {
+			cursor = 0;
+			size = 256;
+			buff = buffer.create(256);
+			ready = false;
+		}
+	end
+	if not tbl_upvr_4[arg1] then
+		tbl_upvr_4[arg1] = {
+			cursor = 0;
+			size = 256;
+			buff = buffer.create(256);
+			ready = false;
+		}
+	end
+end
+local module = {
+	sendAllReliable = function(arg1, arg2, arg3) -- Line 75, Named "sendAllReliable"
+		--[[ Upvalues[5]:
+			[1]: load_upvr (readonly)
+			[2]: tbl_upvw (read and write)
+			[3]: alloc_upvr (readonly)
+			[4]: u8_upvr (readonly)
+			[5]: bufferWriter_upvr (readonly)
+		]]
+		load_upvr(tbl_upvw)
+		alloc_upvr(1)
+		u8_upvr(arg1)
+		arg2(arg3)
+		tbl_upvw = bufferWriter_upvr.export()
+	end;
+	sendAllUnreliable = function(arg1, arg2, arg3) -- Line 85, Named "sendAllUnreliable"
+		--[[ Upvalues[5]:
+			[1]: load_upvr (readonly)
+			[2]: tbl_upvw_2 (read and write)
+			[3]: alloc_upvr (readonly)
+			[4]: u8_upvr (readonly)
+			[5]: bufferWriter_upvr (readonly)
+		]]
+		if not tbl_upvw_2 then
+		end
+		load_upvr({
+			cursor = 0;
+			size = 256;
+			buff = buffer.create(256);
+			ready = false;
+		})
+		alloc_upvr(1)
+		u8_upvr(arg1)
+		arg2(arg3)
+		tbl_upvw_2 = bufferWriter_upvr.export()
+	end;
+	sendPlayerReliable = function(arg1, arg2, arg3, arg4) -- Line 95, Named "sendPlayerReliable"
+		--[[ Upvalues[5]:
+			[1]: load_upvr (readonly)
+			[2]: tbl_upvr (readonly)
+			[3]: alloc_upvr (readonly)
+			[4]: u8_upvr (readonly)
+			[5]: bufferWriter_upvr (readonly)
+		]]
+		if not tbl_upvr[arg1] then
+		end
+		load_upvr({
+			cursor = 0;
+			size = 256;
+			buff = buffer.create(256);
+			ready = false;
+		})
+		alloc_upvr(1)
+		u8_upvr(arg2)
+		arg3(arg4)
+		tbl_upvr[arg1] = bufferWriter_upvr.export()
+	end;
+	sendPlayerUnreliable = function(arg1, arg2, arg3, arg4) -- Line 110, Named "sendPlayerUnreliable"
+		--[[ Upvalues[5]:
+			[1]: load_upvr (readonly)
+			[2]: tbl_upvr_4 (readonly)
+			[3]: alloc_upvr (readonly)
+			[4]: u8_upvr (readonly)
+			[5]: bufferWriter_upvr (readonly)
+		]]
+		load_upvr(tbl_upvr_4[arg1])
+		alloc_upvr(1)
+		u8_upvr(arg2)
+		arg3(arg4)
+		tbl_upvr_4[arg1] = bufferWriter_upvr.export()
+	end;
+}
+local function onReady_upvr(arg1) -- Line 125, Named "onReady"
+	--[[ Upvalues[2]:
+		[1]: tbl_upvr (readonly)
+		[2]: tbl_upvr_4 (readonly)
+	]]
+	if tbl_upvr[arg1] then
+		tbl_upvr[arg1].ready = true
+	end
+	if tbl_upvr_4[arg1] then
+		tbl_upvr_4[arg1].ready = true
+	end
+end
+local function OnSpy_upvr(arg1) -- Line 135, Named "OnSpy"
+	--[[ Upvalues[2]:
+		[1]: tbl_upvr_3 (readonly)
+		[2]: ReplicatedStorage_upvr (readonly)
+	]]
+	if tbl_upvr_3[arg1] then
+	else
+		tbl_upvr_3[arg1] = true
+		ReplicatedStorage_upvr.Events.SendEmbed:Fire("dataReport", arg1)
+		ReplicatedStorage_upvr.Events.mission:Fire(arg1)
+	end
+end
+local Players_upvr = game:GetService("Players")
+local RunService_upvr = game:GetService("RunService")
+function module.start() -- Line 143
+	--[[ Upvalues[13]:
+		[1]: onServerEvent_upvr (readonly)
+		[2]: ReplicatedStorage_upvr (readonly)
+		[3]: onReady_upvr (readonly)
+		[4]: OnSpy_upvr (readonly)
+		[5]: Players_upvr (readonly)
+		[6]: playerAdded_upvr (readonly)
+		[7]: tbl_upvr (readonly)
+		[8]: tbl_upvr_4 (readonly)
+		[9]: tbl_upvr_2 (readonly)
+		[10]: tbl_upvr_3 (readonly)
+		[11]: RunService_upvr (readonly)
+		[12]: tbl_upvw (read and write)
+		[13]: tbl_upvw_2 (read and write)
+	]]
+	local RemoteEvent_3_upvr = Instance.new("RemoteEvent")
+	RemoteEvent_3_upvr.Name = "ByteNetReliable"
+	RemoteEvent_3_upvr.OnServerEvent:Connect(onServerEvent_upvr)
+	RemoteEvent_3_upvr.Parent = ReplicatedStorage_upvr
+	local UnreliableRemoteEvent_upvr = Instance.new("UnreliableRemoteEvent")
+	UnreliableRemoteEvent_upvr.Name = "ByteNetUnreliable"
+	UnreliableRemoteEvent_upvr.OnServerEvent:Connect(onServerEvent_upvr)
+	UnreliableRemoteEvent_upvr.Parent = ReplicatedStorage_upvr
+	local RemoteEvent = Instance.new("RemoteEvent")
+	RemoteEvent.Name = "ClientReady"
+	RemoteEvent.OnServerEvent:Connect(onReady_upvr)
+	RemoteEvent.Parent = ReplicatedStorage_upvr
+	local RemoteEvent_2 = Instance.new("RemoteEvent")
+	RemoteEvent_2.Name = "ClientAnimalReady"
+	RemoteEvent_2.OnServerEvent:Connect(OnSpy_upvr)
+	RemoteEvent_2.Parent = ReplicatedStorage_upvr
+	for _, v in Players_upvr:GetPlayers() do
+		task.spawn(playerAdded_upvr, v)
+	end
+	Players_upvr.PlayerAdded:Connect(playerAdded_upvr)
+	Players_upvr.PlayerRemoving:Connect(function(arg1) -- Line 176
+		--[[ Upvalues[4]:
+			[1]: tbl_upvr (copied, readonly)
+			[2]: tbl_upvr_4 (copied, readonly)
+			[3]: tbl_upvr_2 (copied, readonly)
+			[4]: tbl_upvr_3 (copied, readonly)
+		]]
+		if tbl_upvr[arg1] then
+			tbl_upvr[arg1] = nil
+		end
+		if tbl_upvr_4[arg1] then
+			tbl_upvr_4[arg1] = nil
+		end
+		if tbl_upvr_2[arg1] then
+			tbl_upvr_2[arg1] = nil
+		end
+		if tbl_upvr_3[arg1] then
+			tbl_upvr_3[arg1] = nil
+		end
+	end)
+	local FireAllClients_upvr = RemoteEvent_3_upvr.FireAllClients
+	local FireAllClients_upvr_2 = UnreliableRemoteEvent_upvr.FireAllClients
+	local FireClient_upvr_2 = RemoteEvent_3_upvr.FireClient
+	local FireClient_upvr = UnreliableRemoteEvent_upvr.FireClient
+	RunService_upvr.Heartbeat:Connect(function() -- Line 194
+		--[[ Upvalues[12]:
+			[1]: tbl_upvw (copied, read and write)
+			[2]: FireAllClients_upvr (readonly)
+			[3]: RemoteEvent_3_upvr (readonly)
+			[4]: tbl_upvw_2 (copied, read and write)
+			[5]: FireAllClients_upvr_2 (readonly)
+			[6]: UnreliableRemoteEvent_upvr (readonly)
+			[7]: Players_upvr (copied, readonly)
+			[8]: tbl_upvr (copied, readonly)
+			[9]: tbl_upvr_4 (copied, readonly)
+			[10]: FireClient_upvr_2 (readonly)
+			[11]: FireClient_upvr (readonly)
+			[12]: tbl_upvr_2 (copied, readonly)
+		]]
+		if 0 < tbl_upvw.cursor then
+			local var41 = tbl_upvw
+			local cursor_2 = var41.cursor
+			local buffer_create_result1_5 = buffer.create(cursor_2)
+			buffer.copy(buffer_create_result1_5, 0, var41.buff, 0, cursor_2)
+			FireAllClients_upvr(RemoteEvent_3_upvr, buffer_create_result1_5)
+			tbl_upvw.cursor = 0
+		end
+		if 0 < tbl_upvw_2.cursor then
+			local var44 = tbl_upvw_2
+			local cursor_5 = var44.cursor
+			local buffer_create_result1 = buffer.create(cursor_5)
+			buffer.copy(buffer_create_result1, 0, var44.buff, 0, cursor_5)
+			FireAllClients_upvr_2(UnreliableRemoteEvent_upvr, buffer_create_result1)
+			tbl_upvw_2.cursor = 0
+		end
+		for _, v_2 in Players_upvr:GetPlayers() do
+			local var50 = tbl_upvr[v_2]
+			local var51 = tbl_upvr_4[v_2]
+			if var50 and var51 then
+				if var50.ready and 0 < var50.cursor then
+					local cursor_3 = var50.cursor
+					local buffer_create_result1_2 = buffer.create(cursor_3)
+					buffer.copy(buffer_create_result1_2, 0, var50.buff, 0, cursor_3)
+					FireClient_upvr_2(RemoteEvent_3_upvr, v_2, buffer_create_result1_2)
+					var50.cursor = 0
+				end
+				if var51.ready and 0 < var51.cursor then
+					local cursor_4 = var51.cursor
+					local buffer_create_result1_4 = buffer.create(cursor_4)
+					buffer.copy(buffer_create_result1_4, 0, var51.buff, 0, cursor_4)
+					FireClient_upvr(UnreliableRemoteEvent_upvr, v_2, buffer_create_result1_4)
+					var51.cursor = 0
+				end
+			end
+		end
+		table.clear(tbl_upvr_2)
+	end)
+end
+return module

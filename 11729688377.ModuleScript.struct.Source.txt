@@ -1,0 +1,73 @@
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-26 11:01:07
+-- Luau version 6, Types version 3
+-- Time taken: 0.010863 seconds
+
+local types_upvr = script.Parent.Parent.types
+if game:GetService("RunService"):IsServer() then
+	types_upvr = "server"
+else
+	types_upvr = "client"
+end
+local namespacesDependencies_upvr = require(script.Parent.Parent.namespaces.namespacesDependencies)
+local values_upvr = require(script.Parent.Parent.replicated.values)
+return function(arg1) -- Line 13
+	--[[ Upvalues[3]:
+		[1]: types_upvr (readonly)
+		[2]: namespacesDependencies_upvr (readonly)
+		[3]: values_upvr (readonly)
+	]]
+	-- KONSTANTWARNING: Variable analysis failed. Output will have some incorrect variable assignments
+	local tbl_upvr_2 = {}
+	local tbl_upvr = {}
+	if types_upvr == "server" then
+		local tbl = {}
+		for i in arg1 do
+			local var20 = 0 + 1
+			tbl[i] = var20
+			tbl_upvr_2[var20] = arg1[i]
+			tbl_upvr[var20] = i
+			local var21
+		end
+		namespacesDependencies_upvr.add(tbl)
+	elseif types_upvr == "client" then
+		var21 = namespacesDependencies_upvr
+		var21 = arg1
+		var21.add(var21)
+		var21 = namespacesDependencies_upvr
+		var21 = values_upvr.access(var21.currentName())
+		i = namespacesDependencies_upvr.currentLength()
+		i = nil
+		for i_4, v_3 in var21:read().structs[i], i do
+			tbl_upvr_2[v_3] = arg1[i_4]
+			tbl_upvr[v_3] = i_4
+		end
+	end
+	return {
+		read = function(arg1_2, arg2) -- Line 75, Named "read"
+			--[[ Upvalues[3]:
+				[1]: arg1 (readonly)
+				[2]: tbl_upvr_2 (readonly)
+				[3]: tbl_upvr (readonly)
+			]]
+			local clone = table.clone(arg1)
+			local var28 = arg2
+			for i_2, v in tbl_upvr_2 do
+				local any_read_result1, any_read_result2 = v.read(arg1_2, var28)
+				clone[tbl_upvr[i_2]] = any_read_result1
+				var28 += any_read_result2
+			end
+			return clone, var28 - arg2
+		end;
+		write = function(arg1_3) -- Line 90, Named "write"
+			--[[ Upvalues[2]:
+				[1]: tbl_upvr_2 (readonly)
+				[2]: tbl_upvr (readonly)
+			]]
+			for i_3, v_2 in tbl_upvr_2 do
+				v_2.write(arg1_3[tbl_upvr[i_3]])
+			end
+		end;
+	}
+end
